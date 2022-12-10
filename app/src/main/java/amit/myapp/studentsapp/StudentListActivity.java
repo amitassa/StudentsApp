@@ -10,13 +10,20 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
+import amit.myapp.studentsapp.model.Model;
+import amit.myapp.studentsapp.model.Student;
+
 public class StudentListActivity extends AppCompatActivity {
+    List<Student> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_list);
 
+        data = Model.instance().getAllStudents();
         ListView studentsList = findViewById(R.id.studentlist_list);
         studentsList.setAdapter(new StudentListAdapter());
     }
@@ -26,7 +33,8 @@ public class StudentListActivity extends AppCompatActivity {
 //        public StudentListAdapter(Context ctx, )
         @Override
         public int getCount() {
-            return 10;
+
+            return data.size();
         }
 
         @Override
@@ -44,8 +52,9 @@ public class StudentListActivity extends AppCompatActivity {
             if (view == null){
                 view = getLayoutInflater().inflate(R.layout.student_list_row, null);
             }
+            Student student = data.get(pos);
             TextView nameTv = view.findViewById(R.id.studentlistrow_name_textView);
-            nameTv.setText("Name "+ pos);
+            nameTv.setText(student.Name());
             return view;
         }
     }
