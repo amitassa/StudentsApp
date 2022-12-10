@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity_add_student"
+            android:name=".AddStudentActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
