@@ -6,7 +6,11 @@ import java.util.List;
 public class Model {
     private static final Model _instance = new Model();
 
-    private Model(){}
+    private Model(){
+        for (int i = 0; i < 10; i++) {
+            addStudent(new Student("name " + i, "id" + i, "", false));
+        }
+    }
 
     public static Model instance(){
         return _instance;

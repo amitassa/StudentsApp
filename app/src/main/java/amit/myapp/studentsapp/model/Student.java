@@ -24,6 +24,10 @@ public class Student {
         return _checkBox;
     }
 
+    public void set_CheckBox(Boolean cb){
+        _checkBox = cb;
+    }
+
     public String AvatarURL() {
         return _avatarUrl;
     }

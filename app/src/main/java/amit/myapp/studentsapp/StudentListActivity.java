@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +30,13 @@ public class StudentListActivity extends AppCompatActivity {
         data = Model.instance().getAllStudents();
         ListView studentsList = findViewById(R.id.studentlist_list);
         studentsList.setAdapter(new StudentListAdapter());
+
+        studentsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                Log.d("tag", "onItemClick: " + pos);
+            }
+        });
     }
 
     class StudentListAdapter extends BaseAdapter{
@@ -49,12 +60,27 @@ public class StudentListActivity extends AppCompatActivity {
 
         @Override
         public View getView(int pos, View view, ViewGroup viewGroup) {
+
             if (view == null){
                 view = getLayoutInflater().inflate(R.layout.student_list_row, null);
+                CheckBox cb = view.findViewById(R.id.studentlistrow_checkBox);
+                cb.setOnClickListener(view1 -> {
+                    // The view is recycled, and the anonymous func uses the state of the views
+                    // on creation moment. So, we`ll use TAG to access the relevant checkbox
+                    int pos1 = (Integer) cb.getTag();
+                    Student st = data.get(pos1);
+                    st.set_CheckBox(cb.isChecked());
+                });
             }
-            Student student = data.get(pos);
             TextView nameTv = view.findViewById(R.id.studentlistrow_name_textView);
+            TextView idTv = view.findViewById(R.id.studentlistrow_id_textView);
+            CheckBox cb = view.findViewById(R.id.studentlistrow_checkBox);
+
+            Student student = data.get(pos);
             nameTv.setText(student.Name());
+            idTv.setText(student.ID());
+            cb.setChecked(student.CheckBox());
+            cb.setTag(pos);
             return view;
         }
     }
