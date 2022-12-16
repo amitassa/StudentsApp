@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -29,16 +31,26 @@ public class StudentRecyclerListActivity extends AppCompatActivity {
         data = Model.instance().getAllStudents();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         studentsList.setLayoutManager(layoutManager);
-        studentsList.setAdapter(new StudentRecyclerAdapter());
+        StudentRecyclerAdapter adapter = new StudentRecyclerAdapter();
+        studentsList.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new OnItemClickListener(){
+            @Override
+            public void onItemClick(int pos){
+                Student student = data.get(pos);
+                Intent studentDetailsIntent = new Intent(StudentRecyclerListActivity.this, StudentDetailsActivity.class);
+                studentDetailsIntent.putExtra("student", student);
+                startActivity(studentDetailsIntent);
+            }
+        });
 
     }
 
     class StudentViewHolder extends RecyclerView.ViewHolder {
 
-
         TextView nameTv; TextView idTv; CheckBox cb;
 
-        public StudentViewHolder(@NonNull View view) {
+        public StudentViewHolder(@NonNull View view, OnItemClickListener onClickListener) {
             super(view);
             nameTv = view.findViewById(R.id.studentlistrow_name_textView);
             idTv = view.findViewById(R.id.studentlistrow_id_textView);
@@ -55,6 +67,7 @@ public class StudentRecyclerListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
+                    onClickListener.onItemClick(pos);
                 }
             });
         }
@@ -67,8 +80,15 @@ public class StudentRecyclerListActivity extends AppCompatActivity {
         }
     }
 
-    class StudentRecyclerAdapter extends RecyclerView.Adapter<StudentRecyclerListActivity.StudentViewHolder> {
+    public interface OnItemClickListener{
+        void onItemClick(int pos);
+    }
 
+    class StudentRecyclerAdapter extends RecyclerView.Adapter<StudentRecyclerListActivity.StudentViewHolder> {
+        OnItemClickListener listener;
+        public void setOnItemClickListener(OnItemClickListener listener){
+            this.listener = listener;
+        }
         public StudentRecyclerAdapter(){
             super();
         }
@@ -77,7 +97,7 @@ public class StudentRecyclerListActivity extends AppCompatActivity {
         public StudentRecyclerListActivity.StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = getLayoutInflater().inflate(R.layout.student_list_row, parent, false);
 
-            return new StudentRecyclerListActivity.StudentViewHolder(view);
+            return new StudentRecyclerListActivity.StudentViewHolder(view, listener);
         }
 
         @Override
