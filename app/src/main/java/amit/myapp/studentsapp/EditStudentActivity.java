@@ -64,6 +64,14 @@ public class EditStudentActivity extends AppCompatActivity {
             }
         });
 
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                studentsModel.deleteStudent(currentStudentId);
+                finish();
+            }
+        });
+
 
 
     }
