@@ -2,6 +2,7 @@ package amit.myapp.studentsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -68,6 +69,16 @@ public class EditStudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 studentsModel.deleteStudent(currentStudentId);
+                finish();
+            }
+        });
+
+        cancleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent studentIntent = new Intent(EditStudentActivity.this, StudentDetailsActivity.class);
+                studentIntent.putExtra("student", student);
+                startActivity(studentIntent);
                 finish();
             }
         });
