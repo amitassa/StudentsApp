@@ -18,12 +18,24 @@ public class Student implements Serializable {
         return _name;
     }
 
+    public void setName(String name){
+        _name = name;
+    }
+
     public String ID(){
         return _id;
     }
 
+    public void setID(String id){
+        _id = id;
+    }
+
     public String Phone(){
         return _phone;
+    }
+
+    public void setPhone(String phone){
+        _phone = phone;
     }
 
     public Boolean CheckBox() {

@@ -20,6 +20,7 @@ import amit.myapp.studentsapp.model.Student;
 
 public class StudentRecyclerListActivity extends AppCompatActivity {
     List<Student> data;
+    StudentRecyclerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class StudentRecyclerListActivity extends AppCompatActivity {
         data = Model.instance().getAllStudents();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         studentsList.setLayoutManager(layoutManager);
-        StudentRecyclerAdapter adapter = new StudentRecyclerAdapter();
+        adapter = new StudentRecyclerAdapter();
         studentsList.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnItemClickListener(){
@@ -44,6 +45,15 @@ public class StudentRecyclerListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        if (hasFocus) {
+            data = Model.instance().getAllStudents();
+            adapter.notifyDataSetChanged();
+        }
     }
 
     class StudentViewHolder extends RecyclerView.ViewHolder {

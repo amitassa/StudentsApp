@@ -2,7 +2,9 @@ package amit.myapp.studentsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -20,7 +22,7 @@ public class StudentDetailsActivity extends AppCompatActivity {
         TextView nameTv = findViewById(R.id.student_details_name_tv);
         TextView idTv = findViewById(R.id.student_details_id_tv);
         TextView phoneTv = findViewById(R.id.student_details_phone_tv);
-        CheckBox checkedCb = findViewById(R.id.student_details_checked_cb);
+        CheckBox cb = findViewById(R.id.student_details_checked_cb);
         ImageView imgView = findViewById(R.id.student_details_image);
         Button editBtn = findViewById(R.id.student_details_edit_btn);
 
@@ -28,6 +30,16 @@ public class StudentDetailsActivity extends AppCompatActivity {
         nameTv.setText(student.Name());
         idTv.setText(student.ID());
         phoneTv.setText(student.Phone());
-        checkedCb.setChecked(student.CheckBox());
+        cb.setChecked(student.CheckBox());
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent studentIntent = new Intent(StudentDetailsActivity.this, EditStudentActivity.class);
+                studentIntent.putExtra("student", student);
+                startActivity(studentIntent);
+                finish();
+            }
+        });
     }
 }
