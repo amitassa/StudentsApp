@@ -12,47 +12,55 @@ import android.widget.Button;
 import amit.myapp.studentsapp.model.BlueFragment;
 
 public class MainActivity extends AppCompatActivity {
+    BlueFragment frag1;
+    BlueFragment frag2;
+    BlueFragment frag3;
+    BlueFragment frag4;
+    BlueFragment inDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button addBtn = (Button) findViewById(R.id.main_add_button);
-        Button removeBtn = (Button) findViewById(R.id.main_remove_button);
+        BlueFragment frag1 = BlueFragment.newInstance("1");
+        BlueFragment frag2 = BlueFragment.newInstance("2");
+        BlueFragment frag3 = BlueFragment.newInstance("3");
+        BlueFragment frag4 = BlueFragment.newInstance("4");
 
-        BlueFragment myFrag = new BlueFragment();
+        Button btn1 = findViewById(R.id.main_btn_1);
+        Button btn2 = findViewById(R.id.main_btn_2);
+        Button btn3 = findViewById(R.id.main_btn_3);
+        Button btn4 = findViewById(R.id.main_btn_4);
 
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addFrag(myFrag);
-            }
-        });
+        btn1.setOnClickListener((view -> {
+            displayFragment(frag1);
+        }));
 
-        removeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                removeFrag(myFrag);
-            }
-        });
+        btn2.setOnClickListener((view -> {
+            displayFragment(frag2);
+        }));
 
+        btn3.setOnClickListener((view -> {
+            displayFragment(frag3);
+        }));
 
+        btn4.setOnClickListener((view -> {
+            displayFragment(frag4);
+        }));
+        displayFragment(frag1);
     }
 
-    void addFrag(Fragment frag){
+    private void displayFragment(BlueFragment frag){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction tran = manager.beginTransaction();
         tran.add(R.id.main_frag_container, frag);
+        if (inDisplay != null){
+            tran.remove((inDisplay));
+        }
         tran.addToBackStack("someTAG");
         tran.commit();
+        inDisplay = frag;
     }
 
-    void removeFrag(Fragment frag){
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction tran = manager.beginTransaction();
-        tran.remove(frag);
-        tran.addToBackStack("someTAG1");
-        tran.commit();
-    }
 }
