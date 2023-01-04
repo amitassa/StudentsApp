@@ -12,21 +12,21 @@ import android.widget.Button;
 import amit.myapp.studentsapp.model.BlueFragment;
 
 public class MainActivity extends AppCompatActivity {
-    BlueFragment frag1;
+    StudentsListFragment frag1;
     BlueFragment frag2;
     BlueFragment frag3;
     BlueFragment frag4;
-    BlueFragment inDisplay;
+    Fragment inDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BlueFragment frag1 = BlueFragment.newInstance("1");
-        BlueFragment frag2 = BlueFragment.newInstance("2");
-        BlueFragment frag3 = BlueFragment.newInstance("3");
-        BlueFragment frag4 = BlueFragment.newInstance("4");
+        frag1 = new StudentsListFragment();
+        frag2 = BlueFragment.newInstance("2");
+        frag3 = BlueFragment.newInstance("3");
+        frag4 = BlueFragment.newInstance("4");
 
         Button btn1 = findViewById(R.id.main_btn_1);
         Button btn2 = findViewById(R.id.main_btn_2);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         displayFragment(frag1);
     }
 
-    private void displayFragment(BlueFragment frag){
+    private void displayFragment(Fragment frag){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction tran = manager.beginTransaction();
         tran.add(R.id.main_frag_container, frag);
