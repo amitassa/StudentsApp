@@ -18,7 +18,11 @@
         android:id="@+id/blueFragment"
         android:name="amit.myapp.studentsapp.model.BlueFragment"
         android:label="fragment_blue"
-        tools:layout="@layout/fragment_blue" />
+        tools:layout="@layout/fragment_blue" >
+        <argument
+            android:name="blueTitle"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/addStudentFragment"
         android:name="amit.myapp.studentsapp.AddStudentFragment"

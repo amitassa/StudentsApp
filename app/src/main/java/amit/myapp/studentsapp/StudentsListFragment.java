@@ -42,9 +42,11 @@ List<Student> data;
 //                Intent studentDetailsIntent = new Intent(getContext(), StudentDetailsActivity.class);
 //                studentDetailsIntent.putExtra("student", student);
 //                startActivity(studentDetailsIntent);
-
+                Student student = data.get(pos);
+                // Create action with data
+                StudentsListFragmentDirections.ActionStudentsListFragmentToBlueFragment action = StudentsListFragmentDirections.actionStudentsListFragmentToBlueFragment(student.Name());
                 // Navigate to the next fragment (without tabs)
-                Navigation.findNavController(view).navigate(R.id.action_studentsListFragment_to_blueFragment);
+                Navigation.findNavController(view).navigate(action);
             }
         });
 

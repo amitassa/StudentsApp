@@ -44,6 +44,9 @@ public class BlueFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blue, container, false);
+
+        // Get the argument from the navgraph action and set in title
+        title = BlueFragmentArgs.fromBundle(getArguments()).getBlueTitle();
         TextView titleTv = view.findViewById(R.id.bluefragmet_title_tv);
 
         if (title != null){
