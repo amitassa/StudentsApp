@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,10 +51,14 @@ List<Student> data;
             }
         });
 
-        View button = view.findViewById(R.id.studentslistfrag_add_btn);
+        View addButton = view.findViewById(R.id.studentslistfrag_add_btn);
 
         // Navigate to the next fragment (without tabs), instead of anonymous function
-        button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_studentsListFragment_to_blueFragment));
+        //addButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_studentsListFragment_to_blueFragment));
+
+        // Use global action
+        NavDirections action = StudentsListFragmentDirections.actionGlobalAddStudentFragment();
+        addButton.setOnClickListener(Navigation.createNavigateOnClickListener(action));
 
         return view;
     }
