@@ -2,23 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bluefragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1601FE"
     tools:context=".model.BlueFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:id="@+id/bluefragmet_title_tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#3F51B5"
-        android:gravity="center_horizontal"
-        android:scrollbarSize="4dp"
-        android:text="@string/hello_blank_fragment"
-        android:textColor="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Hello"
+        android:textColor="#F6F4F4"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bluefragment_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="157dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bluefragmet_title_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

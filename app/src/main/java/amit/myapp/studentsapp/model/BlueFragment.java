@@ -2,8 +2,10 @@ package amit.myapp.studentsapp.model;
 
 import android.os.Bundle;
 
+import androidx.annotation.NavigationRes;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +49,11 @@ public class BlueFragment extends Fragment {
         if (title != null){
             titleTv.setText(title);
         }
+
+        View button = view.findViewById(R.id.bluefragment_back_btn);
+        button.setOnClickListener((view1)-> {
+            Navigation.findNavController(view1).popBackStack();
+        });
         return view;
     }
 

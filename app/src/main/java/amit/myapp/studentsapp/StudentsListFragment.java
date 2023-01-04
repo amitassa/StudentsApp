@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,12 +38,20 @@ List<Student> data;
         adapter.setOnItemClickListener(new StudentRecyclerAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(int pos){
-                Student student = data.get(pos);
-                Intent studentDetailsIntent = new Intent(getContext(), StudentDetailsActivity.class);
-                studentDetailsIntent.putExtra("student", student);
-                startActivity(studentDetailsIntent);
+//                Student student = data.get(pos);
+//                Intent studentDetailsIntent = new Intent(getContext(), StudentDetailsActivity.class);
+//                studentDetailsIntent.putExtra("student", student);
+//                startActivity(studentDetailsIntent);
+
+                // Navigate to the next fragment (without tabs)
+                Navigation.findNavController(view).navigate(R.id.action_studentsListFragment_to_blueFragment);
             }
         });
+
+        View button = view.findViewById(R.id.studentslistfrag_add_btn);
+
+        // Navigate to the next fragment (without tabs), instead of anonymous function
+        button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_studentsListFragment_to_blueFragment));
 
         return view;
     }
