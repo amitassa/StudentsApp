@@ -4,7 +4,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -22,7 +25,20 @@ public class AddStudentFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        FragmentActivity parentActivity = getActivity();
+        parentActivity.addMenuProvider(new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                // Removing "add student" option from the menus
+                menu.removeItem(R.id.addStudentFragment);
+            }
+
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                return false;
+            }
+            // Changes applied only to this fragment, so current menu lifecycle is the fragment view lifecycle
+        }, this, Lifecycle.State.RESUMED);
     }
 
     @Override
@@ -46,8 +62,4 @@ public class AddStudentFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        menu.clear();
-    }
 }
