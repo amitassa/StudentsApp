@@ -22,6 +22,9 @@
         <argument
             android:name="blueTitle"
             app:argType="string" />
+        <action
+            android:id="@+id/action_blueFragment_self"
+            app:destination="@id/blueFragment" />
     </fragment>
     <fragment
         android:id="@+id/addStudentFragment"

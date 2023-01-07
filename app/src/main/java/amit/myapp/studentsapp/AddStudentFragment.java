@@ -31,7 +31,7 @@ public class AddStudentFragment extends Fragment {
         });
 
         cancelBtn.setOnClickListener(view1 ->{
-            Navigation.findNavController(view1).popBackStack();
+            Navigation.findNavController(view1).popBackStack(R.id.studentsListFragment, false);
         });
         return view;
     }
