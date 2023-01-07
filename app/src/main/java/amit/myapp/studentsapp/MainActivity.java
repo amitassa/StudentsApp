@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    NavController navController;
+    NavController navController; int fragmentMenuId = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Upper menu handling
 
+        // pop up an alert when clicking on about
+        if(item.getItemId()== R.id.aboutFragment){
+            new AlertDialogFragment().show(getSupportFragmentManager(), "TAG");
+        }
         // Back button on click
         if (item.getItemId() == android.R.id.home){
             navController.popBackStack();
