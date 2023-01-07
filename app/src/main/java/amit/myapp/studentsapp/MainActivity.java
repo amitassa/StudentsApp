@@ -35,8 +35,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Upper menu handling
+
         // Back button on click
         if (item.getItemId() == android.R.id.home){
             navController.popBackStack();
